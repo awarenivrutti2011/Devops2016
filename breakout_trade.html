@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Breakout Trade App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --primary: #0f172a;
+      --secondary: #1e293b;
+      --accent: #3b82f6;
+      --text: #e2e8f0;
+      --danger: #ef4444;
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--primary);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--secondary);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      margin-left: 20px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .card {
+      background: var(--secondary);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .table th, .table td {
+      border: 1px solid #334155;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .status-success {
+      color: var(--success);
+    }
+
+    .status-danger {
+      color: var(--danger);
+    }
+
+    button {
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>📈 Breakout Trade App</h2>
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('dashboard')">Dashboard</a>
+    <a onclick="showSection('scanner')">Scanner</a>
+    <a onclick="showSection('history')">History</a>
+    <a onclick="showSection('profile')">Profile</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <section id="home" class="section active">
+    <h1>Welcome to Breakout Trade App</h1>
+    <p>Track, analyze and act on real-time stock breakout trades with our smart dashboard and scanner tools.</p>
+    <button onclick="showSection('dashboard')">Go to Dashboard</button>
+  </section>
+
+  <section id="dashboard" class="section">
+    <h2>📊 Dashboard</h2>
+    <div class="card">
+      <p><strong>NIFTY 50:</strong> ₹22,145.65 <span class="status-success">+0.85%</span></p>
+      <p><strong>SENSEX:</strong> ₹73,485.21 <span class="status-success">+0.76%</span></p>
+    </div>
+    <div class="card">
+      <h3>Active Breakouts</h3>
+      <table class="table">
+        <thead>
+          <tr><th>Stock</th><th>Time</th><th>Price</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>RELIANCE</td><td>10:30 AM</td><td>₹2,750</td><td class="status-success">Active</td></tr>
+          <tr><td>TCS</td><td>11:15 AM</td><td>₹3,650</td><td class="status-danger">Missed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="scanner" class="section">
+    <h2>🔍 Breakout Scanner</h2>
+    <div class="card">
+      <p>Live breakout scanner detecting high volume breakout stocks in real-time.</p>
+      <table class="table">
+        <thead>
+          <tr><th>Symbol</th><th>Volume Spike</th><th>Price Action</th><th>Signal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>INFY</td><td>+120%</td><td>+5.2%</td><td class="status-success">Buy</td></tr>
+          <tr><td>ADANIENT</td><td>+80%</td><td>+3.7%</td><td class="status-danger">Wait</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="history" class="section">
+    <h2>📜 Trade History</h2>
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr><th>Date</th><th>Stock</th><th>Action</th><th>Price</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2025-07-22</td><td>SBIN</td><td>Buy</td><td>₹565</td><td class="status-success">Profit ₹1,200</td></tr>
+          <tr><td>2025-07-21</td><td>ICICIBANK</td><td>Buy</td><td>₹980</td><td class="status-danger">Loss ₹500</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="profile" class="section">
+    <h2>👤 Profile</h2>
+    <div class="card">
+      <p><strong>Name:</strong> Nivrutti Aware</p>
+      <p><strong>Email:</strong> nivrutti@example.com</p>
+      <p><strong>Subscription:</strong> Premium</p>
+      <button>Logout</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
+
